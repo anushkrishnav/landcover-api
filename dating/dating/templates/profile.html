@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Basic Page Info -->
+	<meta charset="utf-8">
+	 <title>DD</title>
+
+	<!-- Site favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="static/vendors/images/apple-touch-icon.png">
+	
+
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="static/vendors/styles/core.css">
+	<link rel="stylesheet" type="text/css" href="static/vendors/styles/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="src/plugins/cropperjs/dist/cropper.css">
+	<link rel="stylesheet" type="text/css" href="static/vendors/styles/style.css">
+   	 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    	<link rel="stylesheet" href="static/vendors/styles/index.css">
+	
+</head>
+<body>
+<header id="header" class="animated slideInDown" style="animation-delay:1.8s;">
+        <table>
+            <tr>
+                <td id="logo">DD</td>
+                <td id="navigation">
+                 
+                    <a href="index.html">Home</a>
+                   
+                </td>
+            </tr>
+        </table>
+    </header>
+<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+			
+				</div>
+<div class="row">
+
+<div class="pd-20 card-box height-100-p bg-transparent border">
+<div class="profile-photo">
+	<a href="modal" data-toggle="modal" data-target="#modal" class="edit-avatar"><i class="fa fa-pencil"></i></a>
+	<img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="" class="avatar-photo">
+	<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-body pd-5">
+					<div class="img-container">
+						<img id="image" src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="Picture">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input type="submit" value="Update" class="btn btn-primary">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% if current_user.is_authenticated %}
+	{% if current_user == user%}
+	{% set new_messages = current_user.new_messages() %}
+<h5 class="text-center text-white h5 mb-0">{{user.username.title()}}</h5>
+<p class="text-center text-white font-14">Lorem ipsum dolor sit amet</p>
+{% endif %}{% endif %}
+
+<table>
+<tr>
+<td>
+<div class="profile-info text-white ">
+	<h5 class="pd-20 h5 text-primary">Contact Information</h5>
+	<ul>
+		<li>
+			<span class="mb-5 font-14 text-primary">Email Address:</span>
+			FerdinandMChilds@test.com
+		</li>
+		<li>
+			<span class="mb-5 font-14 text-primary">Phone Number:</span>
+			619-229-0054
+		</li>
+		<li>
+			{% if user.country %}
+			<p> 🌍 From <a href="https://www.google.com/maps?q={{user.country.title()}}" target="_blank">
+			{{user.country.title()}}</a></p>{% endif %}
+			
+		</li>
+		<li>
+			<span class="mb-5 font-14 text-primary">Address:</span>
+			1807 Holden Street<br>
+			San Diego, CA 92115
+		</li>
+		<li>
+			{% if current_user == user %}
+			<div class="mt-2 mb-2 d-none d-lg-block" style="background:#212121;padding:8px 8px 8px 32px;font-size:20px;display:block;border-radius:5px;">
+				  <a href="{{ url_for('logout') }}" style="text-decoration:none;color:#818181;"> 🛫 Logout</a>
+				  </div>
+			{% endif %}
+		</li>
+	</ul>
+</div>
+</td> <td>
+<div class="profile-skills">
+	<h5 class="pd-20 h5 text-primary">Key Skills</h5>
+	<h6 class="mb-5 font-14 text-white">HTML</h6>
+	<div class="progress mb-20" style="height: 6px;">
+		<div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+	</div>
+	<h6 class="mb-5 font-14 text-white">Css</h6>
+	<div class="progress mb-20" style="height: 6px;">
+		<div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+	</div>
+	<h6 class="mb-5 font-14 text-white">jQuery</h6>
+	<div class="progress mb-20" style="height: 6px;">
+		<div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+	</div>
+	<h6 class="mb-5 font-14 text-white">Bootstrap</h6>
+	<div class="progress mb-20 bg-success" style="height: 6px;">
+		<div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+	</div>
+</div>
+</td>
+</tr></table>
+</div>
+<div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 mb-30 ">
+<div class="card-box height-100-p overflow-hidden bg-transparent border">
+<div class="profile-tab height-100-p">
+<div class="tab height-100-p">
+<ul class="nav nav-tabs customtab" role="tablist">
+<li class="nav-item">
+<a class="nav-link active text-primary" data-toggle="tab" href="#timeline" role="tab">History</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" data-toggle="tab" href="/messages" role="tab">Chat</a>
+</li>
+
+</ul>
+<div class="tab-content">
+  <br>
+<div class="row clearfix">
+<div class="col-md-4 col-sm-12 mb-30">
+	<div class="card text-white bg-success card-box">
+		<div class="card-header ">X Y Z</div>
+		<div class="card-body">
+			<h5 class="card-title text-white">profile matched</h5>
+			<p class="card-text">YOUR SCORE:80%</p>
+		</div>
+	</div>
+</div>
+<div class="col-md-4 col-sm-12 mb-30">
+	<div class="card text-white bg-danger card-box">
+		<div class="card-header">QWER</div>
+		<div class="card-body">
+			<h5 class="card-title text-white">not Matched</h5>
+			<p class="card-text">YOUR SCORE: 35%</p>
+		</div>
+	</div>
+
+
+</div></div>
+ <button class="btn_one" onclick="location.href='quiz.html';">Lets join room</button>
+</div>
+</div>
+<!-- Setting Tab End -->
+</div>
+</body>
+</html>
