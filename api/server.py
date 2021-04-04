@@ -1,10 +1,13 @@
+import json
+from typing import List
 import uvicorn
-from fastapi import FastAPI, File, UploadFile
-from starlette.responses import RedirectResponse
+from fastapi import FastAPI, File, UploadFile, Request
+from starlette.responses import JSONResponse, RedirectResponse
 import shutil
 from PIL import Image
 from io import BytesIO
 import numpy as np
+import random
 app = FastAPI()
 
 def predict():
@@ -14,16 +17,27 @@ def predict():
 async def index():
     return 'hello'
 
+
+
 def read_imagefile(image):
     image = Image.open(image)
     return image
 
 
-@app.post("/predict/image")
+@app.post("/predict/{latlong}")
+async def predict_lat_long(latlong):
+    latlong = latlong.replace("'", "\"")
+    data = json.loads(latlong)
+    lat,long = data['lat'], data['long']
+    risk = random.uniform(0,100)
+    return {'risk': risk}
+
+@app.post("/image")
 async def predict_api(image: UploadFile = File(...)):
     extension = image.filename.split(".")[-1] in ("jpg", "jpeg", "png")
     if not extension:
         return "Image must be jpg or png format!"
+
     with open("api/destination.png", "wb") as buffer:
         shutil.copyfileobj(image.file, buffer)
         width, height = Image.open('api/destination.png').size
