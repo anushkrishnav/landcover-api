@@ -26,9 +26,6 @@ def read_imagefile(image):
 
 @app.post("/predict/{latlong}")
 async def predict_lat_long(latlong):
-    latlong = latlong.replace("'", "\"")
-    data = json.loads(latlong)
-    lat,long = data['lat'], data['long']
     risk = random.uniform(0,100)
     return {'risk': risk}
 
