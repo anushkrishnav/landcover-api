@@ -1,5 +1,5 @@
 data = '{"lat":"b","long":"k"}'
-url=f'https://landcoverapi.azurewebsites.net/predict/{"lat":"b","long":"k"}'
+url=f'https://landcoverapi.azurewebsites.net/predict/latlong={data}'
 import requests
 import json
 
